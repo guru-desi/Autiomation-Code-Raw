@@ -16,10 +16,10 @@ username = input("Please Enter Username: ")
 password = input("Please Enter Password: ")
 
 #Other Some PreDefined Variables You Can Change As You Wished 
-remark = "OTHERS"
-current_palace = "Jalandhar"
-current_pincode = "144026"
-vehicle = "PB08AL2537"
+remark = ""
+current_palace = ""
+current_pincode = ""
+vehicle = ""
 
 Eway_list = [1,2,5,3]
 
