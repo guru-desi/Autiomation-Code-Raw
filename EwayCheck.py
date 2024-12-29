@@ -16,9 +16,9 @@ username = input("Please Enter Username: ")
 password = input("Please Enter Password: ")
 
 # Eway Which You Want a Print 
-Eway_list = []
+Eway_list = [351909661693,35109661693]
 
-driver = webdriver.Firefox()
+driver = webdriver.Edge()
 driver.get("https://ewaybillgst.gov.in/Login.aspx")
 
 # Find the username and password input fields
@@ -52,6 +52,10 @@ try:
         alert.accept()
         driver.get("https://ewaybillgst.gov.in/BillGeneration/EBPrint.aspx?cal=1")
 
+        print("Ignore Previouse Message!!!")
+        print("Log in Successfully Done!!!")
+        print("Now Sit Back Crab Coffee!!! I'll Collect Validation Data For You ")
+
 
         for element in Eway_list:
 
@@ -73,9 +77,18 @@ try:
 
             time.sleep(2)
 
-            valid_span = driver.find_element(By.ID,"ctl00_ContentPlaceHolder1_lblValidTo" )
+            try:
+                alert = driver.switch_to.alert
+                alert.accept()
+                print("This Eway ",element,"is Invalid")   
 
-            print("This Eway ",element,"is Valid For ",valid_span.text)
+            except NoAlertPresentException:
+
+                time.sleep(2)
+
+                valid_span = driver.find_element(By.ID,"ctl00_ContentPlaceHolder1_lblValidTo" )
+
+                print("This Eway ",element,"is Valid For ",valid_span.text)
 
 
 except NoAlertPresentException:
