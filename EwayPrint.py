@@ -12,8 +12,8 @@ import time
 # Asking the user for Username & Password
 #print("Welcome! to Regular Printing bill System")
 #print("Please Enter Username & Password For Login  ")
-input("Please Enter Username: ")
-input("Please Enter Password: ")
+username = input("Please Enter Username: ")
+password = input("Please Enter Password: ")
 
 # Eway Which You Want a Print 
 Eway_list = []
