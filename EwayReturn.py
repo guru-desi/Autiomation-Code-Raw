@@ -11,12 +11,12 @@ import time
 from pynput import keyboard,mouse
 from pynput.keyboard import Key, Controller
 
-username = ""
-password = ""
+username = "PJ03_APLWB#1509"
+password = "Asian#@1234"
 
 keyboard = Controller()
 
-Eway_list = [""]
+Eway_list = ["391910975460"]
 
 print("\n Total Eway Bill Print Will be",len(Eway_list))
 print("@ First Print The Print DialogBox Freez for 30 Sec For Changing The Setting \n So Stick With Us...")
@@ -108,6 +108,7 @@ try:
                 Doc_Date = Doc_Date_element.text
                 print("\n Doc_Date No is",Doc_Date)
 
+                #find The Transport ID Field 
                 Trans_ID_element = driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_lblTransportor")
                 # Store in Variable
                 Trans_ID_Name = Trans_ID_element.text
@@ -116,16 +117,54 @@ try:
 
                 print("\n Transport ID No is",Transport_ID)
 
-                Select_Table = driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_GVVehicleDetails")
-                Select_Tbody = Select_Table.find_element(By.TAG_NAME,"tbody")
-                Select_TR_list = Select_Tbody.find_elements(By.TAG_NAME,"tr")
-                Select_TD_list = Select_TR_list[1].find_elements(By.TAG_NAME,"td")
-                Vehicle_Tripsheet = Select_TD_list[1].text
+                #Find the Vehicle Number
+                TPT_ID_table = driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_GVVehicleDetails")
+                TPT_ID_tbody = TPT_ID_table.find_element(By.TAG_NAME,"tbody")
+                TPT_tr_list = TPT_ID_tbody.find_elements(By.TAG_NAME,"tr")
+                TPT_td_list = TPT_tr_list[1].find_elements(By.TAG_NAME,"td")
+                Vehicle_Tripsheet = TPT_td_list[1].text
+
+                #split the string to Seprate Vechicle Number With Tripsheet Number
                 vehicle_Tripsheet_list = Vehicle_Tripsheet.split("&")
-                vehicle = Vehicle_Tripsheet_list[0]
+
+                #store first string after spliting it
+                vehicle = vehicle_Tripsheet_list[0]
                 
                 print("\n vehicle No is",vehicle)
 
+                # Scroll down the page
+                body = driver.find_element(By.TAG_NAME, 'body')
+                body.send_keys(Keys.END)
+                time.sleep(1)  # Wait for the page to load
+
+                #Find More Detail Print Element
+                More_Details = driver.find_element(By.NAME, "ctl00$ContentPlaceHolder1$btn_detail")
+                More_Details.click()
+
+                HSN_table = driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_GVItemList")
+                HSN_tbody = HSN_table.find_element(By.TAG_NAME,"tbody")
+                HSN_tr_list = HSN_tbody.find_elements(By.TAG_NAME,"tr")
+
+                Number_Of_HSNS = len(HSN_tr_list)
+                #Now Loop To collect Hsn Code One By one 
+
+                HSN_Code = []
+                Quantity = []
+                Taxable_Amount = []
+                for HSN_index,HSN_element in enumerate(HSN_tr_list):
+                      if(HSN_index == 0):
+                        print("DO Noting")
+                      else:
+                        HSN_td_list = HSN_element.find_elements(By.TAG_NAME,"td")
+                        HSN_Code.append(HSN_td_list[0].text)
+                        Quantity_NOS = HSN_td_list[2].text
+                        Quantity_NOS_Split = Quantity_NOS.split(".")
+                        Quantity.append(Quantity_NOS_Split[0])
+                        Taxable_Amount.append(HSN_td_list[3].text)
+                print("all Done")
+                print(HSN_Code)
+                print(Quantity)
+                print(Taxable_Amount)                      
 
 except NoAlertPresentException:
         print("You Fail TO fill CAthca On time")
