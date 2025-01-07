@@ -11,12 +11,12 @@ import time
 from pynput import keyboard,mouse
 from pynput.keyboard import Key, Controller
 
-username = "PJ03_APLWB#1509"
-password = "Asian#@1234"
+username = ""
+password = ""
 
 keyboard = Controller()
 
-Eway_list = ["391910975460"]
+Eway_list = [""]
 
 print("\n Total Eway Bill Print Will be",len(Eway_list))
 print("@ First Print The Print DialogBox Freez for 30 Sec For Changing The Setting \n So Stick With Us...")
