@@ -121,8 +121,8 @@ try:
                 Select_TR_list = Select_Tbody.find_elements(By.TAG_NAME,"tr")
                 Select_TD_list = Select_TR_list[1].find_elements(By.TAG_NAME,"td")
                 Vehicle_Tripsheet = Select_TD_list[1].text
-                Vehicle_Tripsheet.split("&")
-                vehicle = Vehicle_Tripsheet[0]
+                vehicle_Tripsheet_list = Vehicle_Tripsheet.split("&")
+                vehicle = Vehicle_Tripsheet_list[0]
                 
                 print("\n vehicle No is",vehicle)
 
