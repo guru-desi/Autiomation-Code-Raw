@@ -4,6 +4,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.webdriver.chrome.service import Service
 from selenium import webdriver
@@ -108,6 +110,12 @@ try:
                 Doc_Date = Doc_Date_element.text
                 print("\n Doc_Date No is",Doc_Date)
 
+                 #split all and stor seprately
+                doc_date_array = Doc_Date.split("/")
+                Doc_Date_Year = doc_date_array[2]
+                Doc_Date_Month = doc_date_array[1]
+                Doc_Date_Date = doc_date_array[0]
+
                 #find The Transport ID Field 
                 Trans_ID_element = driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_lblTransportor")
                 # Store in Variable
@@ -164,7 +172,31 @@ try:
                 print("all Done")
                 print(HSN_Code)
                 print(Quantity)
-                print(Taxable_Amount)                      
+                print(Taxable_Amount)
+                driver.get("https://ewaybillgst.gov.in/BillGeneration/BillGeneration.aspx")  
+
+                doc_date_txt = driver.find_element(By.ID,"txtDocDate")
+                doc_date_txt.click()
+
+                calender_year = driver.find_element(By.CLASS_NAME,"ui-datepicker-year")
+                calender_year.click()
+                calender_year.send_keys(Doc_Date_Year)
+
+                calender_month = driver.find_element(By.CLASS_NAME, "ui-datepicker-month")
+                calender_month.click()
+                calender_month.send_keys(Doc_Date_Month)
+
+                """calender_date = driver.find_element(By.CLASS_NAME,"ui-datepicker-calendar")
+                calender_date_tbody = calender_date.find_element(By.TAG_NAME,"tbody")
+                calender_date_tr = calender_date_tbody.find_elements(By.TAG_NAME,"tr")
+
+                calender_date_Picked = calender_date_tr(By.LINK_TEXT ,Doc_Date_Date)
+                calender_date_Picked.click()"""
+
+
+
+                time.sleep(10)
+
 
 except NoAlertPresentException:
         print("You Fail TO fill CAthca On time")
