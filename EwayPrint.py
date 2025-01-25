@@ -53,8 +53,7 @@ try:
         driver.get("https://ewaybillgst.gov.in/BillGeneration/EBPrint.aspx?cal=1")
 
 
-        for element in Eway_list:
-
+        for index,element in enumerate(Eway_list):
             time.sleep(2)
             driver.get("https://ewaybillgst.gov.in/BillGeneration/EBPrint.aspx?cal=1")
 
@@ -83,7 +82,12 @@ try:
 
             # Find the Submit or Enter fields
             #submit_button = driver.find_element(By.ID, "btnsbmt")
-
+            if(index ==0):
+                   time.sleep(30)
+            else:
+                   time.sleep(0.5)
+                   keyboard.press(Key.enter)
+                   keyboard.release(Key.enter)
             # This WIll make Action
             #submit_button.click()
 
