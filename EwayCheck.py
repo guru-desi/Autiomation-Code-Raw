@@ -57,7 +57,7 @@ try:
         print("Now Sit Back Crab Coffee!!! I'll Collect Validation Data For You ")
 
 
-        for element in Eway_list:
+        for index,element in enumerate(Eway_list):
 
             time.sleep(2)
             driver.get("https://ewaybillgst.gov.in/BillGeneration/EBPrint.aspx?cal=1")
