@@ -51,7 +51,7 @@ password_field.send_keys(password)
 
 time.sleep(15)
 
-for element in Eway_list:
+for index,element in enumerate(Eway_list):
 
 
     time.sleep(2)
@@ -81,7 +81,7 @@ for element in Eway_list:
         alert = driver.switch_to.alert
         # Accept the alert (click OK)
         alert.accept()
-        print("Alert was present Please Check This Eway",element)
+        print("SR",index,"Alert was present Please Check This Eway",element)
         driver.get("https://ewaybillgst.gov.in/BillGeneration/EwbExtension.aspx")
 
     except NoAlertPresentException:        
