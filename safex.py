@@ -26,7 +26,7 @@ alert.click()
 radio = driver.find_element(By.ID, "invoice_number")
 radio.click()
 
-for element in PJ_No:
+for index,element in enumerate(PJ_No):
 
     invoice_field = driver.find_element(By.CLASS_NAME, "waybill-tracking")
     invoice_field.clear()
@@ -36,17 +36,23 @@ for element in PJ_No:
     submit.click()
 
     # Locate the specific div
-    div_locator = (By.CLASS_NAME ,"text-start")
-    wait = WebDriverWait(driver, 50)
-    div_element = wait.until(EC.visibility_of_element_located(div_locator))
+    try:
+        div_locator = (By.CLASS_NAME, "text-start")
+        wait = WebDriverWait(driver, 30)
+        div_element = wait.until(EC.visibility_of_element_located(div_locator))
 
-    # Locate the third span within the div
-    span_elements = div_element.find_elements(By.TAG_NAME, 'span')
-    if len(span_elements) >= 3:
-        third_span = span_elements[2]
-        third_span_text = span_elements[2].text
-    else:
-        print('There are less than 3 span elements within the div.')
+        # Locate the third span within the div
+        span_elements = div_element.find_elements(By.TAG_NAME, 'span')
+        if len(span_elements) >= 3:
+            third_span = span_elements[2]
+            third_span_text = span_elements[2].text
+            no_space_string = third_span_text.replace(" ", "")
+        else:
+            print('There are less than 3 span elements within the div.')
+        
 
-    print("invoice",element,"wayBill",third_span_text)
+        print("Sr No.",index,"invoice",element,"wayBill",no_space_string)
 
+    except Exception as e:
+       print("Sr No.",index,"invoice",element,"wayBill Unable_To_load")
+       
