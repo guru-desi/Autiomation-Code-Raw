@@ -14,8 +14,8 @@ from pynput import keyboard,mouse
 from pynput.keyboard import Key, Controller
 
 keyboard = Controller()
-username = "PJ03_APLWB#1509"
-password = "Asian@#321"
+username = ""
+password = ""
 
 driver = webdriver.Firefox()
 driver.get("https://ewaybillgst.gov.in/Login.aspx")
