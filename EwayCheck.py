@@ -16,7 +16,7 @@ username = input("Please Enter Username: ")
 password = input("Please Enter Password: ")
 
 # Eway Which You Want a Print 
-Eway_list = [351909661693,35109661693]
+Eway_list = []
 
 driver = webdriver.Edge()
 driver.get("https://ewaybillgst.gov.in/Login.aspx")
